@@ -1,0 +1,26 @@
+body{
+    background-image: url('../img/background_Login.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+/* ==================================== */
+/* Login */
+/* ==================================== */
+.login-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-box{
+    backdrop-filter: blur(7px);
+    background: transparent;
+    width: 400px;
+    padding: 40px;
+    border-radius: 10px;
+    color: white;
+    font-weight: var(--texto-titulo);
+    color: var(--cor-texto-terciaria);
+}
