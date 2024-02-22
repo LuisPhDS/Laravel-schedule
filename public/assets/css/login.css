@@ -24,3 +24,7 @@ body{
     font-weight: var(--texto-titulo);
     color: var(--cor-texto-terciaria);
 }
+
+.login-box .formulario .text-danger{
+    font-weight: var(--texto-subtitulo);
+}
