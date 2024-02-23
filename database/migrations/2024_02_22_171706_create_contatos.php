@@ -18,7 +18,7 @@ return new class extends Migration
 
             
             $table->string('nome', 65)->nullable(true)->default(null);
-            $table->string('telefone', 17)->nullable(true)->default(null);
+            $table->string('telefone', 20)->nullable(true)->default(null);
             $table->string('imagem')->nullable(true)->default(null);
 
             $table->dateTime('created_at')->nullable(true)->default(null);
