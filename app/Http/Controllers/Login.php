@@ -59,4 +59,10 @@ class Login extends Controller
                          ->withInput()
                          ->with('login_error', "Login inválido! <br> <small class='mt-2'>verifique se o usuário e a senha estão corretos</small>");
     }
+
+    public function logout(){
+        session()->forget('nome');
+
+        return redirect()->route('login');
+    }
 }

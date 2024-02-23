@@ -35,7 +35,7 @@
                 <div class="col-2">
                     <span><i class="fa-regular fa-user"></i>{{-- {{ session()->get('username') }} --}}</span>
                     <span class="mx-3 opacity-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
-                    <a href="{{-- {{ route('logout') }} --}}" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> Sair</a>
+                    <a href="{{ route('logout') }}" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> Sair</a>
                 </div>
             </section>
         </nav>

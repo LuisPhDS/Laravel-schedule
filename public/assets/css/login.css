@@ -22,7 +22,7 @@ body{
     border-radius: 10px;
     color: white;
     font-weight: var(--texto-titulo);
-    color: var(--cor-texto-terciaria);
+    color: var(--cor-texto-principal);
 }
 
 .login-box .formulario .text-danger{

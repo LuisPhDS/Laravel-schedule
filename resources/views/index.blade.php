@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="col text-end">
-                        <a href="#" class="btn btn-primary mb-3">
+                        <a href="{{ route('nova_tarefa') }}" class="btn btn-primary mb-3">
                             <i class="fa-solid fa-square-plus"></i> Nova Tarefa
                         </a>
                     </div>
