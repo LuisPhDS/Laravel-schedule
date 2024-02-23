@@ -26,9 +26,9 @@
 
                 <div class="col-8">
                     <ul class="nav">
-                        <li><a href="#">Tarefas</a></li>
-                        <li><a href="#">Contatos</a></li>
-                        <li><a href="#">Eventos</a></li>
+                        <li><a href="{{ route('index') }}">Tarefas</a></li>
+                        <li><a href="{{-- {{ route('contatos') }} --}}">Contatos</a></li>
+                        <li><a href="{{-- {{ route('eventos') }} --}}">Eventos</a></li>
                     </ul>
                 </div>
             

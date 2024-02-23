@@ -20,7 +20,7 @@
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha:</label>
                     <div class="input-group">
-                        <input type="text" name="senha" id="senha" placeholder="Senha" class="form-control">
+                        <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
                         <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                     </div>
                     @error('usuario')
@@ -34,7 +34,7 @@
 
                 @if (session()->has('login_error'))
                     <div class="alert alert-danger text-center p-1 ">
-                        {{ session()->get('login_error') }}
+                        {!! session()->get('login_error') !!}
                     </div>
                 @endif
             </form>

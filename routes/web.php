@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Main;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 /* ==================================== */
 /* Login */
 /* ==================================== */
 Route::get('/', [Login::class, 'login'])->name('login');
 Route::post('/login_submit', [Login::class, 'login_submit'])->name('login_submit');
+
+/* ==================================== */
+/* Home */
+/* ==================================== */
+Route::get('/index', [Main::class, 'index'])->name('index');

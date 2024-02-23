@@ -1,6 +1,6 @@
-.linha{
+/* .linha{
     border: 1px solid yellow;
-}
+} */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 *{
     margin: 0;
@@ -10,11 +10,12 @@
     font-style: normal;
 }
 :root{
-    --bg-principal: #2D3540; 
-    --bg-secundaria: #F5FFFA;
-    --cor-texto-principal: #ECF9FC;
-    --cor-texto-secundaria: #F2B705;
-    --cor-texto-terciaria: #000000;
+    --bg-principal: #26403D;
+    --bg: #76A68F;
+    --bg-secundaria: #ECF9FC;
+    --cor-texto-principal: #000000;
+    --cor-texto-secundaria: #D9D2B0;
+    --cor-texto-terciaria: #F2B705;
     --cor-warning: #FAB440;
 
     --texto-titulo: 700;
@@ -25,7 +26,7 @@
 body{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 53px;
     background: var(--bg-secundaria);
 }
 header,
@@ -53,7 +54,7 @@ footer{
 }
 .container.p-3 .row .col-8 .nav li>a{
     text-decoration: none;
-    color: var(--cor-texto-principal);
+    color: var(--cor-texto-secundaria);
 }
 
 .container.p-3 .row .col-2 {
@@ -62,9 +63,35 @@ footer{
     justify-content: space-around;
 }
 .container.p-3 .row .col-2 span>i{
-    color: var(--cor-texto-principal);
+    color: var(--cor-texto-secundaria);
 }
 
+
+/* ==================================== */
+/* Cards */
+/* ==================================== */
+.border-primary, .text-primary{
+    background: var(--bg) !important;
+    border-color: var(--cor-texto-principal) !important;
+    color: var(--cor-texto-principal) !important;
+
+    & .card-header{
+        font-weight: var(--texto-titulo);
+    }
+
+    & .card-title{
+        font-weight: var(--texto-descricao);
+    }
+
+    & .card-text{
+        font-weight: var(--texto-subtitulo);
+    }
+}
+
+.container .d-flex{
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
 /* ==================================== */
 /* Footer */
@@ -72,5 +99,5 @@ footer{
 footer>.footer{
     margin: 0 auto;
     padding: 13px;
-    color: var(--cor-texto-principal);
+    color: var(--cor-texto-secundaria);
 }

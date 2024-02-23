@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UsuarioModel;
 use Illuminate\Http\Request;
 
 class Login extends Controller
@@ -31,12 +32,31 @@ class Login extends Controller
         $usuario = $request->input('usuario');
         $senha = $request->input('senha');
 
-        // verificação do usuario
+        // verificar se o usuário existe
+        $model = new UsuarioModel();
+        $user = $model->where(function ($query) use ($usuario) { //compara com o e-mail ou o nome
+                                $query->where('email', $usuario)
+                                ->orWhere('nome', $usuario);
+                        })
+                      ->whereNull('deleted_at')
+                      ->first();
+        // Verificar se a senha está correta
+        if($user){
+            if(password_verify($senha, $user->senha)){
+                $session_data = [
+                    'id' => $user->id,
+                    'nome' => $user->nome,
+                ];
+                // inserindo os dados na sessão
+                session()->put($session_data);
+                return redirect()->route('index');
+            }
+        }
         
 
         // Login inválido
         return redirect()->route('login')
                          ->withInput()
-                         ->with('login_error', 'Login inválido');
+                         ->with('login_error', "Login inválido! <br> <small class='mt-2'>verifique se o usuário e a senha estão corretos</small>");
     }
 }
