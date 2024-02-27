@@ -19,7 +19,7 @@
         <nav class="container p-3">
             <section class="row">
                 <div class="col-2">
-                    <a href="/">
+                    <a href="{{ route('index') }}">
                         <img src="{{ asset('/assets/img/logo.svg') }}" alt="Logo">
                     </a>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
             
                 <div class="col-2">
-                    <span><i class="fa-regular fa-user"></i>{{-- {{ session()->get('username') }} --}}</span>
+                    <span><i class="fa-regular fa-user"></i>{{-- Olá, {{ session()->get('nome') }}! --}}</span>
                     <span class="mx-3 opacity-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
                     <a href="{{ route('logout') }}" class="btn btn-outline-danger"><i class="fa-solid fa-power-off"></i> Sair</a>
                 </div>
@@ -53,5 +53,7 @@
 
     {{-- Bootstrap link JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {{-- JS da mensagem --}}
+    <script src="{{ asset('/assets/js/mensagem.js') }}"></script>
 </body>
 </html>

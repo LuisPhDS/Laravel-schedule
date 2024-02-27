@@ -41,4 +41,10 @@ use Illuminate\Support\Facades\Route;
 // Tarefa - editar
 // =================================
     Route::get('/editar_tarefa/{id}', [Main::class, 'editar_tarefa'])->name('editar_tarefa');
-    Route::get('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit')->name('editar_tarefa_subimit');
+    Route::post('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit');
+
+// =================================
+// Tarefa - excluir
+// =================================
+    Route::get('/excluir_tarefa/{id}', [Main::class, 'excluir_tarefa'])->name('excluir_tarefa');
+    Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
