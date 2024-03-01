@@ -32,19 +32,42 @@ use Illuminate\Support\Facades\Route;
     Route::get('/index', [Main::class, 'index'])->name('index');
 
 // =================================
-// Tarefa - criar
+//              TAREFA
 // =================================
+// criar
     Route::get('/nova_tarefa', [Main::class, 'nova_tarefa'])->name('nova_tarefa');
     Route::post('/nova_tarefa_submit', [Main::class, 'nova_tarefa_submit'])->name('nova_tarefa_submit');
 
 // =================================
-// Tarefa - editar
-// =================================
+//  editar
     Route::get('/editar_tarefa/{id}', [Main::class, 'editar_tarefa'])->name('editar_tarefa');
     Route::post('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit');
 
 // =================================
-// Tarefa - excluir
-// =================================
+// excluir
     Route::get('/excluir_tarefa/{id}', [Main::class, 'excluir_tarefa'])->name('excluir_tarefa');
     Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
+
+// =================================
+//            CONTATOS
+// =================================
+// listar
+
+// criar
+
+// editar
+
+// excluir
+
+
+
+// =================================
+//            EVENTOS
+// =================================
+// listar
+
+// criar
+
+// editar
+
+// excluir
