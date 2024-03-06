@@ -265,8 +265,8 @@ class Main extends Controller
 
             /* Botão gatilho do modal de deleção */
             $link_deletar = '<button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#modalDelecao">
-                <i class="fa-regular fa-trash-can"></i>
-            </button>';
+                                <i class="fa-regular fa-trash-can"></i>
+                             </button>';
             
             $colecao[] = [
                 'tarefa_id' => $tarefa->id,
