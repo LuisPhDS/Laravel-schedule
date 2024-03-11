@@ -305,7 +305,7 @@ class Main extends Controller
             $link_editar = '<a class="btn btn-outline-warning m-1" href="'. route('editar_tarefa', ['id' => Crypt::encrypt($tarefa->id)]) .'"><i class="fa-regular fa-pen-to-square"></i></a>';
 
             /* Botão gatilho do modal de deleção */
-            $link_deletar = '<button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#modalDelecao_'. Crypt::encrypt($tarefa->id) .'">
+            $link_deletar = '<button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#modalDelecao'. $tarefa->id .'">
                                 <i class="fa-regular fa-trash-can"></i>
                              </button>';
             
