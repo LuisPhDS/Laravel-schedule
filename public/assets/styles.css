@@ -1,6 +1,6 @@
-/* .linha{
+.linha{
     border: 1px solid yellow;
-} */
+}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700;900&display=swap');
 *{
     margin: 0;
@@ -100,13 +100,9 @@ main{
 /* ==================================== */
 /* Cards - Listagem */
 /* ==================================== */
-    .container .cartao{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        justify-content: space-around;
-    }
-
+   /*  .cartao{
+        min-height: calc(100vh - 500px);
+    } */
     .card{
         max-width: 14rem;
         max-height: 14rem;
@@ -163,7 +159,6 @@ main{
     .form-label{
         font-weight: var(--texto-descricao);
     }                       
-
 
 /* ==================================== */
 /* Footer */

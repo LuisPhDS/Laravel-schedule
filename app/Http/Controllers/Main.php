@@ -17,13 +17,24 @@ class Main extends Controller
             'title' => 'Agenda Saeb',
         ];
 
-        // Buscar tarefas
-        $model = new TarefaModel();
-        $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
-                        ->whereNull('deleted_at')
-                        ->get();
-        
-        $data['tarefas'] = $this->_get_tarefas($tarefas);
+        // Verificar se houve pesquisa
+        if(session('filtro')){
+            $data['filtro'] = session('filtro');
+            $data['tarefas'] = $this->_get_tarefas(session('tarefas'));
+
+            // limpar sessão
+            session()->forget('filtro');
+            session()->forget('tarefas');
+        } else {
+            // Buscar tarefas
+            $model = new TarefaModel();
+            $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
+                            ->whereNull('deleted_at')
+                            ->get();
+            
+            $data['tarefas'] = $this->_get_tarefas($tarefas);
+        }
+
 
         return view('index', $data);
     }
@@ -255,6 +266,36 @@ class Main extends Controller
     }
 
 // =========================================== 
+// TAREFAS - filtro
+// ===========================================
+    public function filtro($prioridade){
+        // Descriptografar a prioridade
+        /* try {
+            $prioridade = Crypt::decrypt($prioridade);
+        } catch (\Exception $e) {
+            return redirect()->route('index');
+        } */
+
+        // buscar as tarefas
+        $model = new TarefaModel();
+        if($prioridade == 'all'){
+            $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
+                             ->whereNull('deleted_at')
+                             ->get();
+        } else {
+            $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
+                             ->where('prioridade', '=', $prioridade)
+                             ->whereNull('deleted_at')
+                             ->get();
+        }
+
+        session()->put('tarefas', $tarefas);
+        session()->put('filtro', $prioridade);
+
+        return redirect()->route('index');
+    }
+
+// =========================================== 
 // Métodos Privados 
 // ===========================================
     private function _get_tarefas($tarefas){
@@ -264,7 +305,7 @@ class Main extends Controller
             $link_editar = '<a class="btn btn-outline-warning m-1" href="'. route('editar_tarefa', ['id' => Crypt::encrypt($tarefa->id)]) .'"><i class="fa-regular fa-pen-to-square"></i></a>';
 
             /* Botão gatilho do modal de deleção */
-            $link_deletar = '<button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#modalDelecao">
+            $link_deletar = '<button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#modalDelecao_'. Crypt::encrypt($tarefa->id) .'">
                                 <i class="fa-regular fa-trash-can"></i>
                              </button>';
             
@@ -279,5 +320,4 @@ class Main extends Controller
 
         return $colecao;
     }    
-
 }

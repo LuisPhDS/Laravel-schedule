@@ -10,23 +10,23 @@
                     </div>
 
                     <div class="col-6 text-center mb-5">
-                        <form action="#" method="post">
+                        <form action="{{ route('filtro', ['filtro' => 'all']) }}" method="post" id="filtroForm">
                             @csrf
                             <label for="filtro" class="form-label select">Prioridade:</label>
-                            <select name="filtro" id="filtro" class="form-control border-success">
-                                <option value="{{ Crypt::encrypt('all') }}" {{ (!empty($filtro) && $filtro == 'all') ? 'selected' : '' }}>
+                            <select name="filtro" id="filtro" class="form-control border-success" onchange="submitForm(event)">
+                                <option value="{{ 'all' }}" {{ (!empty($filtro) && $filtro == 'all') ? 'selected' : '' }}>
                                     Todos
                                 </option>
-                                <option value="{{ Crypt::encrypt('1') }}" {{ (!empty($filtro) && $filtro == '1') ? 'selected' : '' }}>
+                                <option value="{{ 1 }}" {{ (!empty($filtro) && $filtro == '1') ? 'selected' : '' }}>
                                     Emergencial
                                 </option>
-                                <option value="{{ Crypt::encrypt('2') }}" {{ (!empty($filtro) && $filtro == '2') ? 'selected' : '' }}>
+                                <option value="{{ 2 }}" {{ (!empty($filtro) && $filtro == '2') ? 'selected' : '' }}>
                                     Alta
                                 </option>
-                                <option value="{{ Crypt::encrypt('3') }}" {{ (!empty($filtro) && $filtro == '3') ? 'selected' : '' }}>
+                                <option value="{{ 3 }}" {{ (!empty($filtro) && $filtro == '3') ? 'selected' : '' }}>
                                     Média
                                 </option>
-                                <option value="{{ Crypt::encrypt('4') }}" {{ (!empty($filtro) && $filtro == '4') ? 'selected' : '' }}>
+                                <option value="{{ 4 }}" {{ (!empty($filtro) && $filtro == '4') ? 'selected' : '' }}>
                                     Baixa
                                 </option>
                             </select>
@@ -40,51 +40,65 @@
                     </div>
 
                     @if (count($tarefas) != 0)
-                        <div class="container cartao">
-                            @foreach($tarefas as $tarefa)
-                                <div class="card border-success mb-3">
-                                    <div class="card-header d-flex justify-content-between">
-                                        {!! $tarefa['tarefa_titulo'] !!}
-                                        <p class="card-text">{!! $tarefa['tarefa_prioridade'] !!}</p>
+                        <div class="container">
+                            <div class="row">
+                                @foreach($tarefas as $tarefa)
+                                    <div class="col-4 m-5 card border-success">
+                                        <div class="card-header d-flex justify-content-between">
+                                            {!! $tarefa['tarefa_titulo'] !!}
+                                            <p class="card-text">{!! $tarefa['tarefa_prioridade'] !!}</p>
+                                        </div>
+                                        <div class="card-body text-primary">
+                                            <h5 class="card-title text-truncate">{!! $tarefa['tarefa_descricao'] !!}</h5>
+                                            <div class="d-flex justify-content-evenly">{!! $tarefa['tarefa_acao'] !!}</div>
+                                        </div>
                                     </div>
-                                    <div class="card-body text-primary">
-                                        <h5 class="card-title text-truncate">{!! $tarefa['tarefa_descricao'] !!}</h5>
-                                        <div class="d-flex justify-content-evenly">{!! $tarefa['tarefa_acao'] !!}</div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalDelecao_{{ Crypt::encrypt($tarefa['tarefa_id']) }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content border-success">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">{!! $tarefa['tarefa_titulo'] !!}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {!! $tarefa['tarefa_descricao'] !!}
+                                                    <p>Prioridade: {!! $tarefa['tarefa_prioridade'] !!}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <a href="{{ route('excluir_tarefa_confirmar', ['id' => Crypt::encrypt($tarefa['tarefa_id'])]) }}">
+                                                        <button type="button" class="btn btn-outline-danger m-1">
+                                                            Excluir
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     @else
                         <p class="text-center opacity-50 mb-10">Não existem tarefas registradas</p>
                     @endif
-
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="modalDelecao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">{!! $tarefa['tarefa_titulo'] !!}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {!! $tarefa['tarefa_descricao'] !!}
-                    <p>Prioridade: {!! $tarefa['tarefa_prioridade'] !!}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <a href="{{ route('excluir_tarefa_confirmar', ['id' => Crypt::encrypt($tarefa['tarefa_id'])]) }}">
-                        <button type="button" class="btn btn-outline-danger m-1">
-                            Excluir
-                        </button>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            let filtroValue = document.getElementById("filtro").value;
+            document.getElementById("filtroForm").action = "{{ url('/filtro/') }}" + '/' + filtroValue;
+
+            console.log("Enviando formulário...");
+            document.getElementById("filtroForm").submit();
+        }
+    </script>
 @endsection

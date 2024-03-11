@@ -15,59 +15,73 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* ==================================== */
-/* Login */
-/* ==================================== */
-    Route::get('/', [Login::class, 'login'])->name('login');
-    Route::post('/login_submit', [Login::class, 'login_submit'])->name('login_submit');
+// ROTA COM MIDDLEWARE / Fora da aplicação
+Route::middleware('CheckLogout')->group(function(){
+    /* ==================================== */
+    /* Login */
+    /* ==================================== */
+        Route::get('/', [Login::class, 'login'])->name('login');
+        Route::post('/login_submit', [Login::class, 'login_submit'])->name('login_submit');
+
+});
+
+
+// ROTA COM MIDDLEWARE / Dentro da aplicação
+Route::middleware('CheckLogin')->group(function(){
+// =================================
+//              TAREFA
+// =================================
+    /* ================================= */
+    // listar
+    /* ================================= */
+    Route::get('/index', [Main::class, 'index'])->name('index');
+
+    // =================================
+    // criar
+        Route::get('/nova_tarefa', [Main::class, 'nova_tarefa'])->name('nova_tarefa');
+        Route::post('/nova_tarefa_submit', [Main::class, 'nova_tarefa_submit'])->name('nova_tarefa_submit');
+
+    // =================================
+    //  editar
+        Route::get('/editar_tarefa/{id}', [Main::class, 'editar_tarefa'])->name('editar_tarefa');
+        Route::post('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit');
+
+    // =================================
+    // excluir
+        Route::get('/excluir_tarefa/{id}', [Main::class, 'excluir_tarefa'])->name('excluir_tarefa');
+        Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
+    // =================================
+    // filtro
+    Route::post('/filtro/{filtro}', [Main::class, 'filtro'])->name('filtro');
+
 
 /* ==================================== */
 /* Logout */
 /* ==================================== */
     Route::get('/logout', [Login::class, 'logout'])->name('logout');
 
-/* ==================================== */
-/* Home */
-/* ==================================== */
-    Route::get('/index', [Main::class, 'index'])->name('index');
-
-// =================================
-//              TAREFA
-// =================================
-// criar
-    Route::get('/nova_tarefa', [Main::class, 'nova_tarefa'])->name('nova_tarefa');
-    Route::post('/nova_tarefa_submit', [Main::class, 'nova_tarefa_submit'])->name('nova_tarefa_submit');
-
-// =================================
-//  editar
-    Route::get('/editar_tarefa/{id}', [Main::class, 'editar_tarefa'])->name('editar_tarefa');
-    Route::post('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit');
-
-// =================================
-// excluir
-    Route::get('/excluir_tarefa/{id}', [Main::class, 'excluir_tarefa'])->name('excluir_tarefa');
-    Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
+});
 
 // =================================
 //            CONTATOS
 // =================================
-// listar
+    // listar
 
-// criar
+    // criar
 
-// editar
+    // editar
 
-// excluir
+    // excluir
 
 
 
 // =================================
 //            EVENTOS
 // =================================
-// listar
+    // listar
 
-// criar
+    // criar
 
-// editar
+    // editar
 
-// excluir
+    // excluir

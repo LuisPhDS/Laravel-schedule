@@ -44,10 +44,10 @@
                         <label for="prioridade_tarefa" class="form-label select">Prioridade:</label>
                         <select name="prioridade_tarefa" id="prioridade_tarefa" class="form-select border-success">
                             <option value="-1">--</option>
-                            <option value="0">Emergencial</option>
-                            <option value="1">Alta</option>
-                            <option value="2">Média</option>
-                            <option value="3">Baixa</option>
+                            <option value="1">Emergencial</option>
+                            <option value="2">Alta</option>
+                            <option value="3">Média</option>
+                            <option value="4">Baixa</option>
                         </select>
                         @error('prioridade_tarefa')
                             <div class="text-danger">{{ $errors->get('descricao_tarefa')[0] }}</div>
