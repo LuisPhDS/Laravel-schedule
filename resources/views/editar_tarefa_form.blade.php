@@ -54,10 +54,10 @@
                     <div class="col-6">
                         <label for="prioridade_tarefa" class="form-label select">Prioridade:</label>
                         <select name="prioridade_tarefa" id="prioridade_tarefa" class="form-select border-success">
-                            <option value="0" {{ old('prioridade_tarfa', $tarefa->prioridade == 0 ? "selected" : "") }}>Emergencial</option>
-                            <option value="1" {{ old('prioridade_tarfa', $tarefa->prioridade == 1 ? "selected" : "") }}>Alta</option>
-                            <option value="2" {{ old('prioridade_tarfa', $tarefa->prioridade == 2 ? "selected" : "") }}>Média</option>
-                            <option value="3" {{ old('prioridade_tarfa', $tarefa->prioridade == 3 ? "selected" : "") }}>Baixa</option>
+                            <option value="1" {{ old('prioridade_tarfa', $tarefa->prioridade == 1 ? "selected" : "") }}>Emergencial</option>
+                            <option value="2" {{ old('prioridade_tarfa', $tarefa->prioridade == 2 ? "selected" : "") }}>Alta</option>
+                            <option value="3" {{ old('prioridade_tarfa', $tarefa->prioridade == 3 ? "selected" : "") }}>Média</option>
+                            <option value="4" {{ old('prioridade_tarfa', $tarefa->prioridade == 4 ? "selected" : "") }}>Baixa</option>
                         </select>
                         @error('prioridade_tarefa')
                             <div class="text-danger">{{ $errors->get('descricao_tarefa')[0] }}</div>

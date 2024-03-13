@@ -28,8 +28,9 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 d-flex justify-content-between">
                     <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-right-from-bracket"></i> Entrar</button>
+                    <a class="btn btn-primary" href="{{ route('signin') }}" >Cadastrar-se</a>
                 </div>
 
                 @if (session()->has('login_error'))

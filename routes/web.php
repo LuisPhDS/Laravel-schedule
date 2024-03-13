@@ -23,6 +23,11 @@ Route::middleware('CheckLogout')->group(function(){
         Route::get('/', [Login::class, 'login'])->name('login');
         Route::post('/login_submit', [Login::class, 'login_submit'])->name('login_submit');
 
+    /* ==================================== */
+    /* Usuário */
+    /* ==================================== */
+        Route::get('/signin', [Login::class, 'signin'])->name('signin');
+        Route::post('/novo_usuario_submit', [Login::class, 'novo_usuario_submit'])->name('novo_usuario_submit');
 });
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TarefaModel;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Crypt;
 use Ramsey\Uuid\Uuid;
 
@@ -15,12 +16,25 @@ class Main extends Controller
     public function index(){
         $data = [
             'title' => 'Agenda Saeb',
+            'tarefas_paginadas' => ""
         ];
 
         // Verificar se houve pesquisa
         if(session('filtro')){
+            $model = new TarefaModel();
+            $tarefas = $model->paginate(10);
+            // dd($tarefas);
             $data['filtro'] = session('filtro');
             $data['tarefas'] = $this->_get_tarefas(session('tarefas'));
+
+            //  Criar uma instância do Paginator para as tarefas filtradas
+            $data['tarefas_paginadas'] = new LengthAwarePaginator(
+                $tarefas->items(),
+                $tarefas->total(),
+                $tarefas->perPage(),
+                $tarefas->currentPage(),
+                ['path' => LengthAwarePaginator::resolveCurrentPath()]
+            );
 
             // limpar sessão
             session()->forget('filtro');
@@ -30,9 +44,15 @@ class Main extends Controller
             $model = new TarefaModel();
             $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
                             ->whereNull('deleted_at')
-                            ->get();
+                            ->orderBy('prioridade')->paginate(10);
+                            // cursorPaginate(10);
             
+            $tarefas->withPath(route('index'));
+            // dd($tarefas);
             $data['tarefas'] = $this->_get_tarefas($tarefas);
+
+            $data['tarefas_paginadas'] = $tarefas;
+            
         }
 
 
@@ -269,24 +289,17 @@ class Main extends Controller
 // TAREFAS - filtro
 // ===========================================
     public function filtro($prioridade){
-        // Descriptografar a prioridade
-        /* try {
-            $prioridade = Crypt::decrypt($prioridade);
-        } catch (\Exception $e) {
-            return redirect()->route('index');
-        } */
-
         // buscar as tarefas
         $model = new TarefaModel();
         if($prioridade == 'all'){
             $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
                              ->whereNull('deleted_at')
-                             ->get();
+                             ->orderBy('prioridade')->paginate(10);
         } else {
             $tarefas = $model->where('usuario_idUsuario', '=', session('id'))
                              ->where('prioridade', '=', $prioridade)
                              ->whereNull('deleted_at')
-                             ->get();
+                             ->orderBy('prioridade')->paginate(10);
         }
 
         session()->put('tarefas', $tarefas);
@@ -312,12 +325,42 @@ class Main extends Controller
             $colecao[] = [
                 'tarefa_id' => $tarefa->id,
                 'tarefa_titulo' => '<span class="titulo_tarefa">'. $tarefa->titulo .'</span>',
-                'tarefa_descricao' => '<small class="opacity-50">'. $tarefa->descricao .'</small>',
-                'tarefa_prioridade' => '<span>'. $tarefa->prioridade .'</span>',
+                'tarefa_descricao' => '<small class="opacity-50">'. $tarefa->descricao.'</small>',
+                'tarefa_prioridade' => $this->_prioridade_nome($tarefa->prioridade),
                 'tarefa_acao' => $link_editar . $link_deletar
             ];
         }
 
         return $colecao;
-    }    
+    } 
+    
+    private function _prioridade_nome($prioridade){
+        $prioridade_collection = [
+            1 => "Emergencial", /* vermelho */
+            2 => "Alta", /* amarelo */
+            3 => "Média", /* laranja */
+            4 => "Baixa", /* azul */
+        ];
+
+        if(key_exists($prioridade, $prioridade_collection)){
+            return '<span class="'. $this->_prioridade_badge($prioridade) .'">'. $prioridade_collection[$prioridade] .'</span>';
+        } else {
+            return '<span class="'. $this->_prioridade_badge('Desconhecido') .'">Desconhecido</span>';
+        }
+    }
+
+    private function _prioridade_badge($prioridade){
+        $prioridade_collection = [
+            1 => "badge bg-danger", /* vermelho */
+            2 => "badge bg-laranja", /* laranja */
+            3 => "badge bg-warning", /* amarelo */
+            4 => "badge bg-primary", /* azul */
+        ];
+
+        if(key_exists($prioridade, $prioridade_collection)){
+            return $prioridade_collection[$prioridade];
+        } else {
+            return 'badge bg-secondary';
+        }
+    }
 }

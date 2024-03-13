@@ -43,9 +43,9 @@
                         <div class="row">
                             @foreach($tarefas as $tarefa)
                                 <div class="col-4 mt-5 ml-5 card border-success">
-                                    <div class="card-header d-flex justify-content-between">
+                                    <div class="card-header text-center" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                         {!! $tarefa['tarefa_titulo'] !!}
-                                        <p class="card-text">{!! $tarefa['tarefa_prioridade'] !!}</p>
+                                        <p class="card-text mt-1">{!! $tarefa['tarefa_prioridade'] !!}</p>
                                     </div>
                                     <div class="card-body text-primary">
                                         <h5 class="card-title text-truncate">{!! $tarefa['tarefa_descricao'] !!}</h5>
@@ -76,8 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                @endforeach
+                            @endforeach
                         </div>
                     @else
                         <p class="text-center opacity-50 mb-10">Não existem tarefas registradas</p>
@@ -86,8 +85,14 @@
             </div>
         </div>
     </div>
-            
-            
+    {{-- @if ($tarefas_paginadas) --}}
+        <div class="row">
+            <div class="col-12">
+                {{ $tarefas_paginadas->onEachSide(5)->links() }}
+            </div>
+        </div>
+    {{-- @endif --}}
+
 @endsection
 
 @section('scripts')
@@ -97,8 +102,6 @@
 
             let filtroValue = document.getElementById("filtro").value;
             document.getElementById("filtroForm").action = "{{ url('/filtro/') }}" + '/' + filtroValue;
-
-            console.log("Enviando formulário...");
             document.getElementById("filtroForm").submit();
         }
     </script>

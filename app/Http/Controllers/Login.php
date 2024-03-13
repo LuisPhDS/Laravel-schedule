@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UsuarioModel;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class Login extends Controller
 {
@@ -64,5 +65,50 @@ class Login extends Controller
         session()->forget('nome');
 
         return redirect()->route('login');
+    }
+
+    public function signin(){
+        $data = [
+            'title' => 'Cadastrar-se',
+        ];
+
+        return view('signin', $data);
+    }
+
+    public function novo_usuario_submit(Request $request){
+        $request->validate([
+            'nome_usuario' => 'required|min:6',
+            'senha_usuario' => 'required|min:6',
+            'email_usuario' => 'required|min:6|email|unique:usuarios,email',
+        ],[
+            'nome_usuario.required' => 'O campo é de preenchimento obrigatório',
+            'nome_usuario.min' => 'O campo deve ter no mínimo :min caracteres',
+
+            'senha_usuario.required' => 'O campo é de preenchimento obrigatório',
+            'senha_usuario.min' => 'O campo deve ter no mínimo :min caracteres',
+
+            'email_usuario.required' => 'O campo é de preenchimento obrigatório',
+            'email_usuario.min' => 'O campo deve ter no mínimo :min caracteres',
+            'email_usuario.unique' => 'O e-mail não pode ser cadastrado',
+            'email_usuario.email' => 'O e-mail deve ser válido',
+        ]);
+
+        // capturando os dados do formulário
+        $nome_usuario = $request->input('nome_usuario');
+        $email_usuario = $request->input('email_usuario');
+        $senha_usuario = $request->input('senha_usuario');
+
+        // Inserir os dados na tabela
+        $model = new UsuarioModel();
+        $model->id = Uuid::uuid4()->toString();
+        $model->nome = htmlspecialchars($nome_usuario);
+        $model->email = htmlspecialchars($email_usuario);
+        $model->senha = password_hash(htmlspecialchars($senha_usuario), PASSWORD_DEFAULT);
+        $model->created_at = date('Y-m-d H:i:s');
+        $model->save();
+
+        return redirect()->route('signin')
+                         ->withInput()
+                         ->with('sucesso_usuario', 'Conta criada com sucesso!');
     }
 }

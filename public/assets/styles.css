@@ -1,6 +1,6 @@
-.linha{
+/* .linha{
     border: 1px solid yellow;
-}
+} */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700;900&display=swap');
 *{
     margin: 0;
@@ -26,7 +26,7 @@
 body{
     display: flex;
     flex-direction: column;
-    gap: 53px;
+    gap: 51px;
     background: var(--bg-secundaria);
 }
 header,
@@ -36,7 +36,7 @@ footer{
     background: var(--bg-principal);
 }
 main{
-    height: 100vh;
+    height: 90vh;
     position: relative;
 }
 
@@ -134,7 +134,9 @@ main{
     .btn-outline-warning:hover{
         color: white;
     }
-
+    .bg-laranja{
+        background: #FF5F15;
+    }
 /* ==================================== */
 /* Formulário Cadastro */
 /* ==================================== */
