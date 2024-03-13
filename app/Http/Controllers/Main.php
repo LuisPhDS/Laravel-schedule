@@ -22,10 +22,11 @@ class Main extends Controller
         // Verificar se houve pesquisa
         if(session('filtro')){
             $model = new TarefaModel();
-            $tarefas = $model->paginate(10);
+            $tarefas = session('tarefas');
+            // $tarefas = $model->paginate(10);
             // dd($tarefas);
             $data['filtro'] = session('filtro');
-            $data['tarefas'] = $this->_get_tarefas(session('tarefas'));
+            $data['tarefas'] = $this->_get_tarefas($tarefas);
 
             //  Criar uma instância do Paginator para as tarefas filtradas
             $data['tarefas_paginadas'] = new LengthAwarePaginator(
