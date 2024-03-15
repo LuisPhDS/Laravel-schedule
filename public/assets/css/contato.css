@@ -1,0 +1,183 @@
+.table-widget{
+    border-radius: 1rem;
+    background: var( --bg-principal);
+    padding: 1.5rem;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
+    color: #FFFFFF;
+}
+
+.table-widget table{
+    max-width: 100%;
+    border-collapse: collapse;
+    background: var(--bg);
+    border-radius: 10px;
+}
+
+.table-widget thead{
+    width: 80%;
+}
+.table-widget tbody{
+    width: 80%;
+}
+
+.table-widget .caption{
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-widget .export-btn{
+    background: none;
+    color: #FFFFFF;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.table-widget .export-btn:hover{
+    color: var(--cor-texto-secundaria);
+}
+
+.table-widget .export-btn svg{
+    width: 2rem;
+    height: 2rem;
+}
+
+.table-widget th{
+    padding: 1.25rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    vertical-align: middle;
+    color: var(--cor-texto-principal);
+}
+
+.table-widget td{
+    padding: 1rem;
+    background: transparent;
+    vertical-align: middle;
+    color: var(--cor-texto-principal);
+}
+
+.table-widget tbody tr{
+    transition: all 0.2s;
+}
+
+.table-widget tbody tr:hover{
+    cursor: pointer;
+    background: var(--bg-principal);
+}
+
+.team-menber-profile{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+   
+}
+
+.team-menber-profile img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    
+}
+
+.profile-info_name, .email, .telefone{
+    width: 250px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.email a, .telefone a{
+    text-decoration: none;
+    color: var(--cor-texto-principal);
+}
+
+/* criar - input arquivo */
+*::selection{
+    background: #8800FF;
+}
+
+.dropzone-box{
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid var(--bg-principal);
+    width: 100%;
+}
+
+.dropzone-box h2{
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    color: var(--cor-texto-principal);
+}
+
+.dropzone-box p{
+    font-size: 1.15rem;
+    color: var(--cor-texto-principal);
+}
+
+.dropzone-area{
+    padding: 1rem;
+    position: relative;
+    margin-top: 1.5rem;
+    min-height: 16rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px dashed #FFF;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropzone-area [type="file"]{
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+.dropzone-area .file-upload-icon svg{
+    height: 6rem;
+    max-width: 6rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    stroke: var(--bg-principal);
+    color: var(--bg-principal);
+    transition: all 0.5s ease-in-out;
+}
+
+.dropzone-area:hover{
+    background: #262626;
+    & p{
+        color: #FFF;
+    }
+    & svg{
+        color: #FFF;
+        transform: scale(1.2);
+    }
+}

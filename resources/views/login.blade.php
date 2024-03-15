@@ -2,7 +2,7 @@
 @section('content')
     <div class="login-wrapper">
         <div class="login-box">
-            <h3 class="text-center">Login</h3>
+            <h3 class="text-center">LogIn</h3>
                 <hr>
             <form action="{{ route('login_submit') }}" method="post" class="formulario">
                 @csrf

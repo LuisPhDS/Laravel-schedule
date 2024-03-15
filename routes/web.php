@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Main;
+use App\Http\Controllers\Contato;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,60 +34,62 @@ Route::middleware('CheckLogout')->group(function(){
 
 // ROTA COM MIDDLEWARE / Dentro da aplicação
 Route::middleware('CheckLogin')->group(function(){
-// =================================
-//              TAREFA
-// =================================
-    /* ================================= */
-    // listar
-    /* ================================= */
-    Route::get('/index', [Main::class, 'index'])->name('index');
+    // =================================
+    //              TAREFA
+    // =================================
+        /* ================================= */
+        // listar
+        /* ================================= */
+        Route::get('/index', [Main::class, 'index'])->name('index');
+
+        // =================================
+        // criar
+            Route::get('/nova_tarefa', [Main::class, 'nova_tarefa'])->name('nova_tarefa');
+            Route::post('/nova_tarefa_submit', [Main::class, 'nova_tarefa_submit'])->name('nova_tarefa_submit');
+
+        // =================================
+        //  editar
+            Route::get('/editar_tarefa/{id}', [Main::class, 'editar_tarefa'])->name('editar_tarefa');
+            Route::post('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit');
+
+        // =================================
+        // excluir
+            Route::get('/excluir_tarefa/{id}', [Main::class, 'excluir_tarefa'])->name('excluir_tarefa');
+            Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
+        // =================================
+        // filtro
+        Route::post('/filtro/{filtro}', [Main::class, 'filtro'])->name('filtro');
+
+
+    /* ==================================== */
+    /* Logout */
+    /* ==================================== */
+        Route::get('/logout', [Login::class, 'logout'])->name('logout');
+
+    });
 
     // =================================
-    // criar
-        Route::get('/nova_tarefa', [Main::class, 'nova_tarefa'])->name('nova_tarefa');
-        Route::post('/nova_tarefa_submit', [Main::class, 'nova_tarefa_submit'])->name('nova_tarefa_submit');
+    //            CONTATOS
+    // =================================
+        // listar
+            Route::get('/contatos', [Contato::class, 'contatos'])->name('contatos');
+
+        // criar
+            Route::get('/novo_contato', [Contato::class, 'novo_contato'])->name('novo_contato');
+            Route::post('/novo_contato_submit', [Contato::class, 'novo_contato_submit'])->name('novo_contato_submit');
+        // editar
+
+        // excluir
+
+
 
     // =================================
-    //  editar
-        Route::get('/editar_tarefa/{id}', [Main::class, 'editar_tarefa'])->name('editar_tarefa');
-        Route::post('/editar_tarefa_subimit', [Main::class, 'editar_tarefa_subimit'])->name('editar_tarefa_subimit');
-
+    //            EVENTOS
     // =================================
-    // excluir
-        Route::get('/excluir_tarefa/{id}', [Main::class, 'excluir_tarefa'])->name('excluir_tarefa');
-        Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
-    // =================================
-    // filtro
-    Route::post('/filtro/{filtro}', [Main::class, 'filtro'])->name('filtro');
+        // listar
 
+        // criar
 
-/* ==================================== */
-/* Logout */
-/* ==================================== */
-    Route::get('/logout', [Login::class, 'logout'])->name('logout');
+        // editar
 
-});
-
-// =================================
-//            CONTATOS
-// =================================
-    // listar
-
-    // criar
-
-    // editar
-
-    // excluir
-
-
-
-// =================================
-//            EVENTOS
-// =================================
-    // listar
-
-    // criar
-
-    // editar
-
-    // excluir
+        // excluir

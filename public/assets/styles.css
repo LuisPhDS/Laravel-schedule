@@ -47,14 +47,16 @@ main{
     z-index: 1;
     width: 250px;
 }
+
 /* ==================================== */
 /* Navbar */
 /* ==================================== */
     .container.p-3 .row{
         font-weight: var(--texto-descricao);
     }
-    .container.p-3 .row .col-2 img{
+    .container.p-3 .row .col-2> a > .logo{
         width: 40px;
+        color: var(--cor-texto-secundaria);
     }
 
     .container.p-3 .row .col-8 .nav{

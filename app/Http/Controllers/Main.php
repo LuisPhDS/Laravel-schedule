@@ -344,9 +344,9 @@ class Main extends Controller
         ];
 
         if(key_exists($prioridade, $prioridade_collection)){
-            return '<span class="'. $this->_prioridade_badge($prioridade) .'">'. $prioridade_collection[$prioridade] .'</span>';
+            return '<span class="'. $this->_prioridade_badge($prioridade) .' text-center">'. $prioridade_collection[$prioridade] .'</span>';
         } else {
-            return '<span class="'. $this->_prioridade_badge('Desconhecido') .'">Desconhecido</span>';
+            return '<span class="'. $this->_prioridade_badge('Desconhecido') .' text-center">Desconhecido</span>';
         }
     }
 
