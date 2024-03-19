@@ -13,11 +13,12 @@
             <form action="{{ route('novo_contato_submit') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-4 mt-5">
+                    <div class="col-5 mt-5">
                         {{-- Nome do Contato --}}
-                        <div class="mb-4">
+                        <div class="mb-5">
                             <label for="contato_nome" class="form-label select">Nome:</label>
-                            <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text border-success"><i class="fa-solid fa-signature"></i></span>
                                 <input type="text" name="contato_nome" id="contato_nome" class="form-control border-success" value="{{ old('contato_nome') }}" placeholder="João José da Silva xavier">
                             </div>
                             @error('contato_nome')
@@ -26,9 +27,10 @@
                         </div>
     
                         {{-- Telefone do Contato --}}
-                        <div class="mb-4">
+                        <div class="mb-5">
                             <label for="contato_tel" class="form-label select">Telefone:</label>
-                            <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text border-success"><i class="fa-solid fa-phone-volume"></i></span>
                                 <input type="tel" name="contato_tel" id="contato_tel" class="form-control border-success" value="{{ old('contato_tel') }}" placeholder="(XX) X XXXX-XXXX">
                             </div>
                             @error('contato_tel')
@@ -39,15 +41,16 @@
                         {{-- Email do Contato --}}
                         <div class="mb-4">
                             <label for="contato_email" class="form-label select">E-mail:</label>
-                            <div class="form-group">
-                                <input type="text" name="contato_email" id="contato_email" class="form-control border-success" value="{{ old('contato_email') }}">
+                            <div class="input-group">
+                                <span class="input-group-text border-success"><i class="fa-regular fa-paper-plane"></i></span>
+                                <input type="text" name="contato_email" id="contato_email" class="form-control border-success" value="{{ old('contato_email') }}" placeholder="XXX@XXXX.XXX">
                             </div>
                             @error('contato_email')
                                 <div class="text-danger">{{ $errors->get('contato_email')[0] }}</div>
                             @enderror
                         </div>
                     </div>
-                    <div class="text-center col-8 mb-3">
+                    <div class="text-center col-7 mb-3">
                         {{-- Imagem do Contato --}}
                         <div class="mb-3">
                             <div class="dropzone-box">
@@ -61,9 +64,10 @@
                                     </div>
                                     <input 
                                         type="file"
-                                        id="contato_imagem" name="contato_imagem"    
+                                        id="contato_imagem" name="contato_imagem"
+                                        value="{{ old('contato_imagem') }}"
                                     >
-                                    <p class="file-info">Nenhum arquivo selecionado</p>
+                                    <p class="file-info">{{ old('contato_imagem') ? old('contato_imagem'): "Nenhum arquivo selecionado" }}</p>
                                 </div>
                             </div>
                             @error('contato_imagem')
@@ -82,7 +86,7 @@
             </form>            
         </div>
         @if (session()->has('error_contato'))
-                <div class="alert alert-danger text-center p-1 erro-msg">
+                <div class="alert alert-danger text-center erro-msg">
                     {{ session()->get('error_contato') }}
                 </div>
         @endif
@@ -91,4 +95,52 @@
 @endsection
 @section('scripts')
     <script src="{{ asset('/assets/js/dragDropImg.js') }}"></script>
+    <script>
+        // Máscara telefone
+        var telefoneContato = document.querySelector("#contato_tel");
+
+        telefoneContato.addEventListener("input", ()=>{
+            // remover os caracteres não numéricos
+            var valorLimpo = telefoneContato.value.replace(/\D/g, "").substring(0,11);
+
+             // dividir a string em um array
+            var numerosArray = valorLimpo.split("");
+
+            // variável do número formatado
+            var numeroFormat = "";
+
+            // condicional quando a quantidade de números for maior do que zero
+            if(numerosArray.length > 0){
+                numeroFormat += `(${numerosArray.slice(0,2).join("")})`;
+            }
+
+            // condicional quando a quantidade de números for maior do que dois
+            if(numerosArray.length > 2){
+                numeroFormat += ` ${numerosArray.slice(2,7).join("")}`;
+            }
+
+            // condicional quando a quantidade de números for maior do que sete
+            if(numerosArray.length > 7){
+                numeroFormat += `-${numerosArray.slice(7,11).join("")}`;
+            }
+
+            //  enviar o número formatado para o campo
+            telefoneContato.value = numeroFormat;
+        });
+
+        telefoneContato.addEventListener("keydown", (event) => {
+            if (event.key === "Backspace") {
+                var valorLimpo = telefoneContato.value.replace(/\D/g, "").substring(0, 11);
+                var numerosArray = valorLimpo.split("");
+                var numeroFormat = "";
+                
+                // apaga o caracteres numéricos um a
+                if (numerosArray.length > 0) {
+                    numeroFormat += `${numerosArray.slice(0, 11).join("")}`;
+                }
+
+                telefoneContato.value = numeroFormat;
+            }
+        });
+    </script>
 @endsection

@@ -28,6 +28,7 @@ body{
     flex-direction: column;
     gap: 51px;
     background: var(--bg-secundaria);
+    position: relative;
 }
 header,
 footer{
@@ -37,13 +38,12 @@ footer{
 }
 main{
     height: 90vh;
-    position: relative;
 }
 
 .erro-msg{
     position: absolute;
     right: 0;
-    top: 0;
+    top: 78px;
     z-index: 1;
     width: 250px;
 }

@@ -314,7 +314,7 @@ class Main extends Controller
 // ===========================================
     private function _get_tarefas($tarefas){
         $colecao = [];
-
+        
         foreach($tarefas as $tarefa){
             $link_editar = '<a class="btn btn-outline-warning m-1" href="'. route('editar_tarefa', ['id' => Crypt::encrypt($tarefa->id)]) .'"><i class="fa-regular fa-pen-to-square"></i></a>';
 

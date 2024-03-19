@@ -12,12 +12,12 @@
                     </div>
 
                     <div class="col-6 text-center mb-5">
-                        <form action="{{-- {{ route('filtro')}} --}}" method="post" id="filtroForm">
+                        <form action="{{ route('filtro_contato')}}" method="post" id="filtroForm">
                             @csrf
                             <div class="mb-3 p-2"></div>
                             <div class="input-group">
                                 <input type="text" class="form-control border-success" name="filtro" id="filtro" placeholder="Pesquisar...">
-                                <button class="input-group-text border-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <button type="submit" class="input-group-text border-success"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </form>
                     </div>
@@ -42,7 +42,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Nome</th>
                                         <th class="text-center ">Telefone</th>
                                         <th class="text-center ">Email</th>
                                         <th class="text-center "><i class="fa-solid fa-sliders"></i></th>
@@ -52,7 +52,7 @@
                                     @foreach($contatos as $contato)
                                         <tr>
                                             <td class="team-menber-profile">
-                                                <img class="text-center" src="{!! $contato['contato_imagem'] !!}" alt="">
+                                                <img class="text-center" src="{!! $contato['contato_imagem'] !!}">
                                                 <div class="profile-info">
                                                     <div class="profile-info_name">{!! $contato['contato_nome'] !!}</div>
                                                 </div>
@@ -75,6 +75,30 @@
                                                 </div>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="modalDelecao{{ $contato['contato_id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content border-success">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5 text-truncate" id="exampleModalLabel"><strong>{!! $contato['contato_nome'] !!}</strong></h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p><strong>Telefone: {!! $contato['contato_telefone'] !!}</strong></p>
+                                                        <p><strong>E-mail: {!! $contato['contato_email'] !!}</strong></p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                        <a href="{{ route('excluir_contato_confirmar', ['id' => Crypt::encrypt($contato['contato_id'])]) }}">
+                                                            <button type="button" class="btn btn-outline-danger m-1">
+                                                                Excluir
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -86,10 +110,20 @@
                 </div>
             </div>
         </div>
+        @if(session()->has('sucesso_contato'))
+            <div class="alert alert-success text-center erro-msg">
+                {{ session()->get('sucesso_contato') }}
+            </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-12">
             {{ $contatos_paginados->onEachSide(5)->links() }}
         </div>
     </div>
+
+    
+@endsection
+@section('scripts')
+    <script src="{{ asset('/assets/js/exportCsv.js') }}"></script>
 @endsection

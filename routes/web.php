@@ -34,13 +34,20 @@ Route::middleware('CheckLogout')->group(function(){
 
 // ROTA COM MIDDLEWARE / Dentro da aplicação
 Route::middleware('CheckLogin')->group(function(){
+    /* ==================================== */
+    /* Logout */
+    /* ==================================== */
+        Route::get('/logout', [Login::class, 'logout'])->name('logout');
+
+        });
+
     // =================================
     //              TAREFA
     // =================================
         /* ================================= */
         // listar
         /* ================================= */
-        Route::get('/index', [Main::class, 'index'])->name('index');
+            Route::get('/index', [Main::class, 'index'])->name('index');
 
         // =================================
         // criar
@@ -58,15 +65,9 @@ Route::middleware('CheckLogin')->group(function(){
             Route::get('/excluir_tarefa_confirmar/{id}', [Main::class, 'excluir_tarefa_confirmar'])->name('excluir_tarefa_confirmar');
         // =================================
         // filtro
-        Route::post('/filtro/{filtro}', [Main::class, 'filtro'])->name('filtro');
+            Route::post('/filtro/{filtro}', [Main::class, 'filtro'])->name('filtro');
 
 
-    /* ==================================== */
-    /* Logout */
-    /* ==================================== */
-        Route::get('/logout', [Login::class, 'logout'])->name('logout');
-
-    });
 
     // =================================
     //            CONTATOS
@@ -80,6 +81,9 @@ Route::middleware('CheckLogin')->group(function(){
         // editar
 
         // excluir
+            Route::get('/excluir_contato_confirmar/{id}', [Contato::class, 'excluir_contato_confirmar'])->name('excluir_contato_confirmar');
+        // filtro
+            Route::post('/filtro_contato', [Contato::class, 'filtro'])->name('filtro_contato');
 
 
 
