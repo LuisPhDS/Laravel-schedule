@@ -30,12 +30,14 @@ body{
     background: var(--bg-secundaria);
     position: relative;
 }
+
 header,
 footer{
     display: flex;
     align-items: center !important;
     background: var(--bg-principal);
 }
+
 main{
     height: 90vh;
 }
@@ -46,6 +48,15 @@ main{
     top: 78px;
     z-index: 1;
     width: 250px;
+}
+
+.page-link{
+    color: var(--bg-principal) !important;
+}
+
+.page-item.active>.page-link{
+    background: var(--bg) !important;
+    border-color: var(--bg-principal) !important;
 }
 
 /* ==================================== */

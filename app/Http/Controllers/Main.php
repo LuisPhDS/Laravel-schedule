@@ -231,32 +231,32 @@ class Main extends Controller
 // =========================================== 
 // TAREFAS - excluir
 // ===========================================
-    public function excluir_tarefa($id){
-        try{
+    // public function excluir_tarefa($id){
+    //     try{
 
-            $id = Crypt::decrypt($id);
+    //         $id = Crypt::decrypt($id);
 
-        } catch (\Exception $e){
+    //     } catch (\Exception $e){
 
-            return redirect()->route('index');
+    //         return redirect()->route('index');
 
-        }
+    //     }
 
-        // captura dos dados da tarefa
-        $model = new TarefaModel();
-        $tarefa = $model->where('id', '=', $id)->first();
+    //     // captura dos dados da tarefa
+    //     $model = new TarefaModel();
+    //     $tarefa = $model->where('id', '=', $id)->first();
 
-        // verificar se a tarefa existe
-        if(!$tarefa){
-            return redirect()->route('index');
-        }
+    //     // verificar se a tarefa existe
+    //     if(!$tarefa){
+    //         return redirect()->route('index');
+    //     }
 
-        $data = [
-            'tarefa' => $tarefa
-        ];
+    //     $data = [
+    //         'tarefa' => $tarefa
+    //     ];
 
-        return view('index', $data);
-    }
+    //     return view('index', $data);
+    // }
 
     public function excluir_tarefa_confirmar($id){
         $id_tarefa = null;

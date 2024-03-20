@@ -111,7 +111,7 @@
             </div>
         </div>
         @if(session()->has('sucesso_contato'))
-            <div class="alert alert-success text-center erro-msg">
+            <div class="alert alert-success border-warning text-center erro-msg">
                 {{ session()->get('sucesso_contato') }}
             </div>
         @endif

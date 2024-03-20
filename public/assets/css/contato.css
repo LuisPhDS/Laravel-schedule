@@ -182,14 +182,6 @@
         transform: scale(1.2);
     }
 }
-.page-link{
-    color: var(--bg-principal) !important;
-}
-
-.page-item.active>.page-link{
-    background: var(--bg) !important;
-    border-color: var(--bg-principal) !important;
-}
 
 .modal-body>p>strong>a{
     color: var(--bg-principal);

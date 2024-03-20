@@ -79,7 +79,8 @@ Route::middleware('CheckLogin')->group(function(){
             Route::get('/novo_contato', [Contato::class, 'novo_contato'])->name('novo_contato');
             Route::post('/novo_contato_submit', [Contato::class, 'novo_contato_submit'])->name('novo_contato_submit');
         // editar
-
+            Route::get('/editar_contato/{id}', [Contato::class, 'editar_contato'])->name('editar_contato');
+            Route::post('/editar_contato_subimit', [Contato::class, 'editar_contato_subimit'])->name('editar_contato_subimit');
         // excluir
             Route::get('/excluir_contato_confirmar/{id}', [Contato::class, 'excluir_contato_confirmar'])->name('excluir_contato_confirmar');
         // filtro
